@@ -1,48 +1,32 @@
-from core.settings.base import *
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-
-ALLOWED_HOSTS = [
-    h.strip()
-    for h in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
-    if h.strip()
-]
-
-CORS_ALLOWED_ORIGINS = [
-    o.strip()
-    for o in os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "").split(",")
-    if o.strip()
-]
-
-CORS_ALLOW_CREDENTIALS = False
-
-CSRF_TRUSTED_ORIGINS = [
-    f"https://{host}" for host in ALLOWED_HOSTS
-] + [
-    f"http://{host}" for host in ALLOWED_HOSTS
-]
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("POSTGRES_DB", "my_db"),
-        'USER': os.environ.get("POSTGRES_USER", "my_user"),
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "my_password"),
-        'HOST': os.environ.get("POSTGRES_HOST", "localhost"),
-        'PORT': os.environ.get("POSTGRES_PORT", "5432"),
-    }
+JAZZMIN_SETTINGS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-success",
+    "navbar": "navbar-success navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": True,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-light-success",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": True,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-outline-warning",
+        "danger": "btn-outline-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
 }
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-USE_X_FORWARDED_HOST = True
-USE_X_FORWARDED_PORT = True
-
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
